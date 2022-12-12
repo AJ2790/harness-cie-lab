@@ -1,0 +1,31 @@
+inputSet:
+  identifier: "AJ2790"
+  name: "AJ2790"
+  orgIdentifier: "default"
+  projectIdentifier: "AJbootcamp"
+  pipeline:
+    identifier: "AJService"
+    properties:
+      ci:
+        codebase:
+          build:
+            type: "PR"
+            spec:
+              number: "<+trigger.prNumber>"
+    stages:
+    - stage:
+        identifier: "DeployDev"
+        type: "Deployment"
+        spec:
+          service:
+            serviceInputs:
+              serviceDefinition:
+                type: "Kubernetes"
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: "payment-service"
+    variables:
+    - name: "seusername"
+      type: "String"
+      value: "<+trigger.payload.pull_request.user.login>"
