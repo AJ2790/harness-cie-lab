@@ -104,3 +104,8 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+  variables:
+    - name: seusername
+      type: String
+      description: ""
+      value: <+input>
